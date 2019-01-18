@@ -13,13 +13,11 @@ while True:
     if not ret:
         break
 
-    cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
     #YCrCb 변환
-    hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2YCrCb)
+    ycrcb = cv2.cvtColor(frame,cv2.COLOR_BGR2YCrCb)
 
     #Cr:133~173, Cb:77~127
-    mask_hand = cv2.inRange(hsv,np.array([0,133,77]),np.array([255,173,127]))
+    mask_hand = cv2.inRange(ycrcb,np.array([0,133,77]),np.array([255,173,127]))
     
     cv2.imshow("Hands",mask_hand)
     cv2.imshow("origin",frame)
@@ -29,4 +27,23 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+#이미지를 불러와서 테스
+'''
+import cv2
+import numpy as np
+
+img = cv2.imread('./hand_sample.jpg')
+
+#YCrCb 변환
+ycrcb = cv2.cvtColor(img,cv2.COLOR_BGR2YCrCb)
+#Cr:133~173, Cb:77~127
+mask_hand = cv2.inRange(ycrcb,np.array([0,133,77]),np.array([255,173,127]))
+
+cv2.imshow("Hands",mask_hand)
+cv2.imshow("Origin",img)
+
+cap.release()
+cv2.destroyAllWindows()
+'''
 
