@@ -7,11 +7,19 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 face_cascade = cv2.CascadeClassifier("./haarcascade/haarcascade_frontalface_default.xml")
 
+#얼굴을 가리기 위해 원 그리기
 def DrawCircle(img, rects, color):
     for x, y, w, h in rects:
-        cv2.circle(img, (x+int(w/2),y+int(h/2)), int(h/2), (255,255,255), -1)
+        cv2.circle(img, (x+int(w/2),y+int(h/2)), int((h+50)/2), (0,0,0), -1)
         
-    
+#YCrCb색상을 이용하여 피부색검출
+def maskedByYCrCb(img):
+    #YCrCb 변환
+    ycrcb = cv2.cvtColor(img,cv2.COLOR_BGR2YCrCb)
+    #Cr:133~173, Cb:77~127
+    masked = cv2.inRange(ycrcb,np.array([0,133,77]),np.array([255,173,127]))
+    return masked
+
 while True:
     
     ret, frame = cap.read()
@@ -21,12 +29,14 @@ while True:
 
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray,1.3,5)
+    
+    masked = maskedByYCrCb(frame)
+
     for x,y,w,h in faces:
-        #cv2.circle(frame, (x+int(w/2),y+int(h/2)), int(h/2), (255,255,255), -1)
-        DrawCircle(frame, faces, (255,255,255))
-        
+        DrawCircle(masked, faces, (255,255,255))
         
     cv2.imshow("Face",frame)
+    cv2.imshow("masked",masked)
     if cv2.waitKey(1)>0:
         break
 
