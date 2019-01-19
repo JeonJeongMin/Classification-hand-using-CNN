@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -29,6 +28,7 @@ while True:
     ret, frame = cap.read()
     
     if not ret:
+        print('No captured video!')
         break
 
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)

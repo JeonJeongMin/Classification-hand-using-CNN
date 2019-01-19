@@ -1,3 +1,4 @@
+'''
 import cv2
 import numpy as np
 
@@ -28,12 +29,12 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-#이미지를 불러와서 테스
+#이미지를 불러와서 테스트
 '''
 import cv2
 import numpy as np
 
-img = cv2.imread('./hand_sample.jpg')
+img = cv2.imread('./paper (5).jpg')
 
 #YCrCb 변환
 ycrcb = cv2.cvtColor(img,cv2.COLOR_BGR2YCrCb)
@@ -43,7 +44,7 @@ mask_hand = cv2.inRange(ycrcb,np.array([0,133,77]),np.array([255,173,127]))
 cv2.imshow("Hands",mask_hand)
 cv2.imshow("Origin",img)
 
-cap.release()
+cv2.waitKey(0)
+
 cv2.destroyAllWindows()
-'''
 
