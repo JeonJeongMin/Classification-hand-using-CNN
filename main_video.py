@@ -23,6 +23,13 @@ def maskedByYCrCb(img):
 def DrawRect(img, rects, color):
     for x,y,w,h in rects:
         cv2.rectangle(img, (x, y), (x+w, y+h), color, 2)
+
+def findhandContour(img):
+    ret, thr = cv2.threshold(img,127,255,0)
+    contours, _ = cv2.findContours(thr, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(img, contours, -1, (0,255,0),1)
+
+    
 while True:
     
     ret, frame = cap.read()
@@ -42,6 +49,11 @@ while True:
 
     #마스크 이미지에 얼굴 가리기
     DrawCircle(masked, faces, (255,255,255))
+
+    #손 Contour그리기
+    #findhandContour(masked)
+
+
         
     cv2.imshow("Face",frame)
     cv2.imshow("masked",masked)
