@@ -24,7 +24,7 @@ def DrawRect(img, rects, color):
     for x,y,w,h in rects:
         cv2.rectangle(img, (x, y), (x+w, y+h), color, 2)
 
-def findhandContour(img):
+def findHand(img):
     ret, thr = cv2.threshold(img,127,255,0)
     contours, _ = cv2.findContours(thr, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(img, contours, -1, (0,255,0),1)
