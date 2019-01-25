@@ -42,8 +42,9 @@ def DrawRect(img, rects, color):
 
 def DrawContourHand(img,mask):
     ret, thr = cv2.threshold(mask,127,255,0)
-    contours, _ = cv2.findContours(thr, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(img, contours, -1, (0,255,0),1)
+    contours, _ = cv2.findContours(thr, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    print(len(contours))
+    cv2.drawContours(img, contours[len(contours)-1], -1, (0,255,0),2)
 
 def onChange(x):
     pass
@@ -51,11 +52,11 @@ def onChange(x):
 def createTrackBarHSV():
     cv2.namedWindow('color_HSV')
     #트랙바 생성
-    cv2.createTrackbar('H_low', 'color_HSV', 5,179,onChange)
-    cv2.createTrackbar('H_high', 'color_HSV', 33,179,onChange)
-    cv2.createTrackbar('V_low', 'color_HSV', 64,255,onChange)
-    cv2.createTrackbar('V_high', 'color_HSV', 175,255,onChange)
-    cv2.createTrackbar('S_low', 'color_HSV', 122,255,onChange)
+    cv2.createTrackbar('H_low', 'color_HSV', 0,179,onChange)
+    cv2.createTrackbar('H_high', 'color_HSV', 21,179,onChange)
+    cv2.createTrackbar('V_low', 'color_HSV', 105,255,onChange)
+    cv2.createTrackbar('V_high', 'color_HSV', 241,255,onChange)
+    cv2.createTrackbar('S_low', 'color_HSV', 42,255,onChange)
     cv2.createTrackbar('S_high', 'color_HSV', 255,255,onChange)
 
 HSV_first_flag = True
@@ -88,6 +89,7 @@ while True:
         
     cv2.imshow("Face",frame)
     cv2.imshow("masked",masked)
+    
     if cv2.waitKey(1)>0:
         break
 
