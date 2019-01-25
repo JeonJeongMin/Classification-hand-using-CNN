@@ -35,9 +35,6 @@ def maskedByHSV(img):
     mask = cv2.inRange(hsv, lower_thr, upper_thr)
     return mask
 
-
-
-
 #얼굴에 사각형 그리기
 def DrawRect(img, rects, color):
     for x,y,w,h in rects:
