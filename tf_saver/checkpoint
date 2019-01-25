@@ -1,2 +1,0 @@
-model_checkpoint_path: "cnn01.ckpt-0"
-all_model_checkpoint_paths: "cnn01.ckpt-0"
