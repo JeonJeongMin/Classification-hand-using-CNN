@@ -150,6 +150,7 @@ def test():
   Showimg('data',test_num)
   print('prediction:',sess.run(prediction,feed_dict={X:np.reshape(x_data[test_num],[-1,64,64,3])}))
 
+#카메라 시
 def capture():
   cap = cv2.VideoCapture(0)
   cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -160,8 +161,24 @@ def capture():
     _, frame = cap.read()
     resized = cv2.resize(frame,(64,64))
     resized = np.reshape(resized,[-1,64,64,3])
-    print('prediction:',sess.run(prediction,feed_dict={X:resized}))
+    predicted = sess.run(prediction,feed_dict={X:resized})
+    print('prediction:',predicted)
 
+    #글양식
+    red = (0,0,255)
+    green = (0,255,0)
+    thickness = 2
+    frame_h = frame.shape[0]
+    frame_w = frame.shape[1]
+    org = ((int)(frame_w / 2) - 200, (int)(frame_h / 2) - 100)
+    font = cv2.FONT_ITALIC
+    fontScale = 1.2
+
+    if predicted == 0:
+      cv2.putText(frame, 'paper', org, font, fontScale, red, thickness, cv2.LINE_AA)
+    else:
+      cv2.putText(frame, 'rock', org, font, fontScale, green, thickness, cv2.LINE_AA)
+      
     cv2.imshow('origin',frame)
 
     
