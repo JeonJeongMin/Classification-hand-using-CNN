@@ -150,7 +150,7 @@ def test():
   Showimg('data',test_num)
   print('prediction:',sess.run(prediction,feed_dict={X:np.reshape(x_data[test_num],[-1,64,64,3])}))
 
-#카메라 시
+#카메라 작동
 def capture():
   cap = cv2.VideoCapture(0)
   cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -164,7 +164,7 @@ def capture():
     predicted = sess.run(prediction,feed_dict={X:resized})
     print('prediction:',predicted)
 
-    #글양식
+    #글씨 양식
     red = (0,0,255)
     green = (0,255,0)
     thickness = 2
@@ -174,6 +174,7 @@ def capture():
     font = cv2.FONT_ITALIC
     fontScale = 1.2
 
+    #글씨 출력
     if predicted == 0:
       cv2.putText(frame, 'paper', org, font, fontScale, red, thickness, cv2.LINE_AA)
     else:
