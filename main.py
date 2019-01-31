@@ -8,3 +8,5 @@ model = cnn.CNN(sess)
 model.load_saver('dir')
 model.get_data('dir')
 model.test()
+
+#vd.capture(sess,model.prediction)

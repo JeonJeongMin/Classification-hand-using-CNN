@@ -80,7 +80,6 @@ def startVideo():
             createTrackBarHSV()
             HSV_first_flag=False
         masked = maskedByHSV(frame)    
-        #masked = maskedByYCrCb(frame)
         
         #마스크 이미지에 얼굴 가리기
         DrawCircle(masked, faces, (255,255,255))
@@ -99,7 +98,7 @@ def startVideo():
 
 
 #카메라 작동
-def capture():
+def capture(sess,prediction,X):
   cap = cv2.VideoCapture(0)
   cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
   cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 300)
