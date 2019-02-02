@@ -1,1 +1,1 @@
-# Classification-hand-using-SVM
+# Classification-hand-using-CNN

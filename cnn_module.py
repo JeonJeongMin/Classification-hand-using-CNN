@@ -159,4 +159,9 @@ class CNN:
             plt.imshow(img)
             plt.show()
 
-
+if __name__=='__main__':
+    sess = tf.Session()
+    model = CNN(sess)
+    model.get_data('')
+    model.load_saver('')
+    model.test()

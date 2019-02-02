@@ -134,3 +134,6 @@ def capture(sess,prediction,X):
     if k == 27:
         break    
   cv2.destroyAllWindows()
+
+if __name__=='__main__':
+    startVideo()
