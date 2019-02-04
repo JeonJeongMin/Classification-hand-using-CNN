@@ -4,9 +4,9 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 sess = tf.Session()
-model = cnn.CNN(sess)
+model = cnn.CNN(sess)#CNN network생성
 model.load_saver('dir')
 model.get_data('dir')
 model.test()
 
-#vd.capture(sess,model.prediction)
+vd.capture(sess,model.prediction,model.X)

@@ -118,7 +118,6 @@ class CNN:
         
         return (self.x_train,self.y_train),(self.x_test,self.y_test)
 
-
     def load_saver(self,dir):
         saver = tf.train.Saver(tf.global_variables())#앞서 정의한 변수를 가져오는 함수
 
